@@ -1,0 +1,60 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  margin: 0px;
+}
+
+.container {
+  position: fixed;
+  left: 0;
+  right: 0;
+
+  background-image: url('./constants/images/NBA.jpg');
+
+  background-size: cover;
+}
+
+.container {
+  height: 900px;
+  top: 69px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .glass {
+    width: 800px;
+    height: 600px;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    .MuiContainer-maxWidthSm {
+      margin-left: 50px !important;
+    }
+  }
+}
+
+.header {
+  color: black;
+  font-size: x-large;
+  font-weight: bold;
+  font-family: sans-serif;
+  padding-bottom: 2rem;
+}
+
+.body {
+  display: flex;
+  .team {
+    padding: 1rem;
+  }
+}
+.button {
+  padding-top: 1rem;
+}

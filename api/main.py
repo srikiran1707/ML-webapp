@@ -108,7 +108,7 @@ async def get_predict(data: Match):
     return {
     "data": {
     'prediction': res,
-    'interpretation': 'Team '+ win +' has a higher chance to win'
+    'interpretation': win
     }
 }
 
