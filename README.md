@@ -1,6 +1,6 @@
 # About NBA Win Predictor
 
-NBA Winner Prediction is a full-stack web application integrated with Machine Learning to predict winnner of an NBA game based on past data
+NBA Winner Predictor is a full-stack web application integrated with Machine Learning to predict winnner of an NBA game based on past data
 
 In this project a user can request prediction for an NBA game ,
 the user has to select the home and away teams and click on predict button
