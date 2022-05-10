@@ -109,4 +109,8 @@ const teams = [
   },
 ]
 
+export const getTeam = (teamName) => {
+  return teams.find((team) => team.abbreviation === teamName)?.label
+}
+
 export default teams
