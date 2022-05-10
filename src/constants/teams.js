@@ -1,3 +1,5 @@
+import { isNilorEmpty } from '../utils/common'
+
 const teams = [
   {
     abbreviation: 'ATL',
@@ -110,6 +112,7 @@ const teams = [
 ]
 
 export const getTeam = (teamName) => {
+  if (isNilorEmpty(teamName)) return null
   return teams.find((team) => team.abbreviation === teamName)?.label
 }
 

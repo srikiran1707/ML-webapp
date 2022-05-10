@@ -11,6 +11,7 @@ import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
+import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
 import { getTeam } from '../constants/teams'
 import axios from 'axios'
@@ -88,6 +89,7 @@ const PredictionResponse = (props) => {
         .post('http://localhost:8080/prediction', params)
         .then((res) => {
           const data = res.data.data
+          props.getWinner(data.prediction)
           setInterpretation(data.interpretation)
           handleClickOpen()
         })
@@ -100,6 +102,7 @@ const PredictionResponse = (props) => {
   return (
     <>
       <Button
+        size='large'
         variant='contained'
         disabled={isNilorEmpty(Home) || isNilorEmpty(Away)}
         onClick={handleSubmit}
@@ -122,13 +125,14 @@ const PredictionResponse = (props) => {
           <Typography gutterBottom>{`Team ${getTeam(
             interpretation
           )} has a higher chance to win based on recent performance and historical data.`}</Typography>
-          <Typography gutterBottom>{`Team ${getTeam(
+          <Typography gutterBottom>{`${getTeam(
             interpretation
           )} has performed better in recent matches and has a higher rating.`}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            View Stats
+          <Button className='viewStats' autoFocus onClick={handleClose}>
+            <QueryStatsIcon />
+            Stats
           </Button>
         </DialogActions>
       </BootstrapDialog>
