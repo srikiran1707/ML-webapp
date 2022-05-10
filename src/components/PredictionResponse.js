@@ -1,16 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import CustomAlert from './CustomAlert'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
+import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
-import Alert from '@mui/material/Alert'
-import AlertTitle from '@mui/material/AlertTitle'
 
 import { getTeam } from '../constants/teams'
 import axios from 'axios'
@@ -57,9 +57,10 @@ BootstrapDialogTitle.propTypes = {
 const PredictionResponse = (props) => {
   const { Home, Away } = props
   const [open, setOpen] = useState(false)
-  const [prediction, setPrediction] = useState('')
   const [interpretation, setInterpretation] = useState('')
   const [alert, setAlert] = useState(false)
+  const [errMsg, setErrorMsg] = useState(null)
+
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -67,27 +68,33 @@ const PredictionResponse = (props) => {
     setOpen(false)
   }
 
+  const handleError = (err) => {
+    setAlert(true)
+    setErrorMsg(err)
+    setTimeout(() => {
+      setAlert(false)
+      setErrorMsg(null)
+    }, 3000)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    handleClickOpen()
 
     const params = { Home, Away }
     if (Home === Away) {
-      setAlert(true)
-      setTimeout(() => {
-        setAlert(false)
-      }, 3000)
-      setOpen(false)
-      return
+      handleError('Home team and Away team should be different')
+    } else {
+      axios
+        .post('http://localhost:8080/prediction', params)
+        .then((res) => {
+          const data = res.data.data
+          setInterpretation(data.interpretation)
+          handleClickOpen()
+        })
+        .catch((error) => {
+          handleError(error.message)
+        })
     }
-    axios
-      .post('http://localhost:8080/prediction', params)
-      .then((res) => {
-        const data = res.data.data
-        setPrediction(data.prediction)
-        setInterpretation(data.interpretation)
-      })
-      .catch((error) => alert(`Error: ${error.message}`))
   }
 
   return (
@@ -114,15 +121,15 @@ const PredictionResponse = (props) => {
         <DialogContent dividers>
           <Typography gutterBottom>{`Team ${getTeam(
             interpretation
-          )} has a higher chance to win`}</Typography>
+          )} has a higher chance to win based on recent performance and historical data.`}</Typography>
         </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            View Stats
+          </Button>
+        </DialogActions>
       </BootstrapDialog>
-      {alert && (
-        <Alert severity='error'>
-          <AlertTitle>Error</AlertTitle>
-          <strong>Home team and Away team should be different</strong>
-        </Alert>
-      )}
+      <div className='error'>{alert && <CustomAlert msg={errMsg} />}</div>
     </>
   )
 }
