@@ -7,6 +7,8 @@ import Toolbar from '@mui/material/Toolbar'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import SportsBasketballRoundedIcon from '@mui/icons-material/SportsBasketballRounded'
+import locale from '../utils/locale'
+
 const pages = ['home', 'about', 'predictor']
 
 const Navbar = () => {
@@ -21,7 +23,7 @@ const Navbar = () => {
                 key={index}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link as={Link} to={`/${page}`}>
+                <Link as={Link} to={`/${locale(page)}`}>
                   {page}
                 </Link>
               </Button>

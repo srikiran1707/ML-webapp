@@ -74,7 +74,7 @@ def prediction_model(Home,Away):
         df=pd.DataFrame([cols],columns=col_names)
         return df
 
-
+# todo
 def normalize_stats():
     from sklearn import preprocessing
     team_stats = pd.read_csv("C:\\Users\\sriki\\Downloads\\matchbymatch.csv", index_col = 0)[::-1]
@@ -84,6 +84,53 @@ def normalize_stats():
 
     norm_stats = preprocessing.normalize()
 
+def team_stats(Home,Away):
+        Home=Home.upper()
+        Away=Away.upper()
+        match_by_match_stats = pd.read_csv("C:\\Users\\sriki\\Downloads\\matchbymatch.csv", index_col = 0)[::-1]
+        total_no_of_matches = len(match_by_match_stats)
+        cols=[]
+        home_stats=[]
+        away_stats=[]
+        home_elo=0
+        away_elo=0
+        home_sm=0
+        away_sm=0
+        home_found=False
+        away_found=False
+        home_names=['HRFG%','HR3P%','HRFT%','HRO','HRT','HRS','HRP']
+        away_names=['ARFG%','AR3P%','ARFT%','ARO','ART','ARS','ARP']
+        col_names=['Home_elo_before','Away_elo_before','Home_sm_before','Away_sm_before']
+        for i in range(total_no_of_matches-1,0,-1):
+            if(match_by_match_stats['Home'][i]==Home and not home_found): 
+                home_found=True
+                home_elo=match_by_match_stats['Home_elo_before'][i]
+                home_sm=match_by_match_stats['Home_sm_before'][i]
+                home_stats.append(match_by_match_stats['HRFG%'][i])
+                home_stats.append(match_by_match_stats['HR3P%'][i])
+                home_stats.append(match_by_match_stats['HRFT%'][i])
+                home_stats.append(match_by_match_stats['HRO'][i])
+                home_stats.append(match_by_match_stats['HRT'][i])
+                home_stats.append(match_by_match_stats['HRS'][i])
+                home_stats.append(match_by_match_stats['HRP'][i])
+            if(match_by_match_stats['Away'][i]==Away and not away_found):
+                away_found=True
+                away_elo=match_by_match_stats['Away_elo_before'][i]
+                away_sm=match_by_match_stats['Away_sm_before'][i]
+                away_stats.append(match_by_match_stats['ARFG%'][i])
+                away_stats.append(match_by_match_stats['AR3P%'][i])
+                away_stats.append(match_by_match_stats['ARFT%'][i])
+                away_stats.append(match_by_match_stats['ARO'][i])
+                away_stats.append(match_by_match_stats['ART'][i])
+                away_stats.append(match_by_match_stats['ARS'][i])
+                away_stats.append(match_by_match_stats['ARP'][i])
+            if(home_found and away_found):
+                cols.extend([home_elo,away_elo,home_sm,away_sm])
+                break
+        home =  pd.DataFrame([home_stats],columns=home_names)
+        away =  pd.DataFrame([away_stats],columns=away_names)
+        elosm = pd.DataFrame([cols],columns=col_names)
+        return [home,away,elosm]
 
 
 # Defining the model input types given by the user
@@ -111,6 +158,20 @@ async def get_predict(data: Match):
     'interpretation': win
     }
 }
+
+@app.post("/stats/")
+async def get_stats(data: Match):
+    Home=data.Home.upper()
+    Away=data.Away.upper()
+    data=team_stats(Home,Away)
+    
+    return {
+        "data":{
+            "home_stats":data[0],
+            "away_stats":data[1],
+            "elosm":data[2]
+        }
+    }
 
 
 

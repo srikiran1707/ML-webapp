@@ -116,12 +116,15 @@ const PredictionResponse = (props) => {
           id='customized-dialog-title'
           onClose={handleClose}
         >
-          Prediction Result
+          Prediction Result : {getTeam(interpretation)}
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>{`Team ${getTeam(
             interpretation
           )} has a higher chance to win based on recent performance and historical data.`}</Typography>
+          <Typography gutterBottom>{`Team ${getTeam(
+            interpretation
+          )} has performed better in recent matches and has a higher rating.`}</Typography>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
