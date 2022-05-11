@@ -74,7 +74,7 @@ const ModelStats = () => {
 
   return (
     <div className='modelContainer'>
-      <h2>Model Comparison</h2>
+      <h2 className='header'>Model Comparison</h2>
       <div className='modelChart'>
         <Bar options={options} data={data_stats} />
       </div>
