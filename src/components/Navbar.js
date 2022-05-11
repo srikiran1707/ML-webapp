@@ -10,7 +10,7 @@ import SportsBasketballRoundedIcon from '@mui/icons-material/SportsBasketballRou
 import { Typography } from '@mui/material'
 import locale from '../utils/locale'
 
-const pages = ['home', 'about', 'predictor']
+const pages = ['home', 'about', 'predictor', 'model comparision']
 
 const Navbar = () => {
   return (
@@ -52,6 +52,13 @@ const Navbar = () => {
               </Button>
             ))}
             <Outlet />
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+              <Link as={Link} to='/aboutus'>
+                About us
+              </Link>
+            </Button>
           </Box>
         </Toolbar>
       </Container>

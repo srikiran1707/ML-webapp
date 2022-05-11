@@ -3,6 +3,7 @@ const navigationMapper = {
   predictor: 'predictor',
   about: 'about',
   stats: 'predictor/stats',
+  'model comparision': 'modelstats',
 }
 
 const locale = (name) => {

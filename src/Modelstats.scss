@@ -1,0 +1,23 @@
+.modelContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+
+  background-image: url('./images/NBA.png');
+
+  background-size: cover;
+  height: 900px;
+  top: 69px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modelChart {
+    width: 1000px;
+    height: 800px;
+    margin-top: 8rem;
+  }
+  .modelChart > canvas {
+    background-color: white;
+    padding: 1rem;
+  }
+}

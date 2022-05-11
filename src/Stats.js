@@ -114,7 +114,7 @@ const Stats = () => {
 
   return (
     <div className='statsContainer'>
-      <h1>{`${getTeam(Home)} vs ${getTeam(Away)}`}</h1>
+      <h2>{`${getTeam(Home)} v/s ${getTeam(Away)}`}</h2>
       <div className='chart'>
         <div className='stats'>
           <Bar options={options} data={data_stats} />

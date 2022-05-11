@@ -5,6 +5,8 @@ import Navbar from './components/Navbar'
 import Home from './Home'
 import About from './About'
 import Stats from './Stats'
+import ModelStats from './ModelStats'
+import Aboutus from './Aboutus'
 import './App.scss'
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
           <Route path='about' element={<About />} />
           <Route path='predictor' element={<Winner />} />
           <Route path='predictor/stats' element={<Stats />} />
+          <Route path='modelstats' element={<ModelStats />} />
+          <Route path='aboutus' element={<Aboutus />} />
         </Route>
       </Routes>
     </BrowserRouter>

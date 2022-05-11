@@ -28,7 +28,7 @@ allow_headers=["*"],
 log_model = pickle.load(open('../model/log_model.pkl', 'rb'))
 
 # Defining global data for models
-final_team_stats = pd.read_csv("C:\\Users\\sriki\\Downloads\\matchbymatch.csv", index_col = 0)[::-1]
+final_team_stats = pd.read_csv(open('../model/matchbymatch.csv','rb'), index_col = 0)[::-1]
 
 cols =  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,33,34,37,38]
 final_team_stats.drop(final_team_stats.columns[cols],axis=1, inplace=True)
@@ -43,7 +43,7 @@ x_train, x_test, y_train, y_test = train_test_split(features, label, test_size =
 def predict_stats(Home,Away):
         Home=Home
         Away=Away
-        match_by_match_stats = pd.read_csv("C:\\Users\\sriki\\Downloads\\matchbymatch.csv", index_col = 0)[::-1]
+        match_by_match_stats = pd.read_csv(open('../model/matchbymatch.csv','rb'), index_col = 0)[::-1]
         total_no_of_matches = len(match_by_match_stats)
         cols=[]
         home_stats=[]
@@ -89,8 +89,7 @@ def predict_stats(Home,Away):
 # todo
 def normalize_stats():
     from sklearn import preprocessing
-    team_stats = pd.read_csv("C:\\Users\\sriki\\Downloads\\matchbymatch.csv", index_col = 0)[::-1]
-    
+    team_stats = pd.read_csv(open('../model/matchbymatch.csv','rb'), index_col = 0)[::-1]
     cols =  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,33,34,37,38]
     team_stats.drop(team_stats.columns[cols],axis=1, inplace=True)
 
@@ -99,7 +98,7 @@ def normalize_stats():
 def team_stats(Home,Away):
         Home=Home
         Away=Away
-        match_by_match_stats = pd.read_csv("C:\\Users\\sriki\\Downloads\\matchbymatch.csv", index_col = 0)[::-1]
+        match_by_match_stats = pd.read_csv(open('../model/matchbymatch.csv','rb'), index_col = 0)[::-1]
         total_no_of_matches = len(match_by_match_stats)
         cols=[]
         home_stats=[]
