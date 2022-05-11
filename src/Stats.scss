@@ -1,0 +1,51 @@
+.chart {
+  top: 70px;
+}
+
+h1 {
+  position: fixed;
+  top: 90px;
+}
+.statsContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+
+  background-image: url('./images/NBA.png');
+
+  background-size: cover;
+  height: 900px;
+  top: 69px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  .chart {
+    display: flex;
+    margin-top: 8rem;
+    .stats {
+      padding-right: 1rem;
+    }
+    .stats > canvas {
+      height: 300px;
+      width: 600px;
+      background-color: white;
+      padding: 1rem;
+    }
+    .statsp > canvas {
+      height: 300px;
+      width: 600px;
+      background-color: white;
+      padding: 1rem;
+    }
+  }
+  .elosm {
+    padding-top: 1rem;
+  }
+  .elosm > canvas {
+    height: 300px !important;
+    width: 600px !important;
+    background-color: white;
+    padding: 1rem;
+  }
+}

@@ -12,7 +12,9 @@ import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
 import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction'
+import locale from '../utils/locale'
 
+import { Outlet, Link } from 'react-router-dom'
 import axios from 'axios'
 import { isNilorEmpty, getTeam } from '../utils/common'
 
@@ -130,8 +132,11 @@ const PredictionResponse = (props) => {
             disabled={isNilorEmpty(Home) || isNilorEmpty(Away)}
           >
             <QueryStatsIcon />
-            Stats
+            <Link as={Link} to={`/${locale('stats')}`}>
+              Stats
+            </Link>
           </Button>
+          <Outlet />
         </div>
       </div>
       <BootstrapDialog

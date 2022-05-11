@@ -17,11 +17,13 @@ const Winner = () => {
 
   const onHomeChangeHandler = (value) => {
     setHome(value.abbreviation)
+    sessionStorage.setItem('home', value.abbreviation)
     setPrediction('')
   }
 
   const onAwayChangeHandler = (value) => {
     setAway(value.abbreviation)
+    sessionStorage.setItem('away', value.abbreviation)
     setPrediction('')
   }
 

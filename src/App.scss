@@ -3,3 +3,7 @@ a {
   cursor: pointer;
   text-decoration: none !important;
 }
+
+button[disabled] > a {
+  color: #012845;
+}
