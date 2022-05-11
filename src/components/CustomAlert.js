@@ -4,8 +4,8 @@ import Alert from '@mui/material/Alert'
 
 const CustomAlert = (props) => {
   return (
-    <Alert severity='error'>
-      <AlertTitle>Error</AlertTitle>
+    <Alert severity={props.type}>
+      <AlertTitle>{props.type}</AlertTitle>
       <strong>{props.msg}</strong>
     </Alert>
   )

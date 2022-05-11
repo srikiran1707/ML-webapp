@@ -13,9 +13,8 @@ import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
 
-import { getTeam } from '../constants/teams'
 import axios from 'axios'
-import { isNilorEmpty } from '../utils/common'
+import { isNilorEmpty, getTeam } from '../utils/common'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -60,8 +59,8 @@ const PredictionResponse = (props) => {
   const [open, setOpen] = useState(false)
   const [interpretation, setInterpretation] = useState('')
   const [alert, setAlert] = useState(false)
-  const [errMsg, setErrorMsg] = useState(null)
-
+  const [msg, setMsg] = useState(null)
+  const [type, setType] = useState('')
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -71,10 +70,23 @@ const PredictionResponse = (props) => {
 
   const handleError = (err) => {
     setAlert(true)
-    setErrorMsg(err)
+    setMsg(err)
+    setType('error')
     setTimeout(() => {
       setAlert(false)
-      setErrorMsg(null)
+      setMsg(null)
+      setType('')
+    }, 3000)
+  }
+
+  const handleSuccess = (msg) => {
+    setAlert(true)
+    setMsg(msg)
+    setType('success')
+    setTimeout(() => {
+      setAlert(false)
+      setMsg(null)
+      setType('')
     }, 3000)
   }
 
@@ -82,21 +94,19 @@ const PredictionResponse = (props) => {
     e.preventDefault()
 
     const params = { Home, Away }
-    if (Home === Away) {
-      handleError('Home team and Away team should be different')
-    } else {
-      axios
-        .post('http://localhost:8080/prediction', params)
-        .then((res) => {
-          const data = res.data.data
-          props.getWinner(data.prediction)
-          setInterpretation(data.interpretation)
-          handleClickOpen()
-        })
-        .catch((error) => {
-          handleError(error.message)
-        })
-    }
+
+    axios
+      .post('http://localhost:8080/prediction', params)
+      .then((res) => {
+        const data = res.data.data
+        props.getWinner(data.prediction)
+        setInterpretation(data.interpretation)
+        handleSuccess('Prediction fetched successfully .')
+        handleClickOpen()
+      })
+      .catch((error) => {
+        handleError(error.message)
+      })
   }
 
   return (
@@ -136,7 +146,9 @@ const PredictionResponse = (props) => {
           </Button>
         </DialogActions>
       </BootstrapDialog>
-      <div className='error'>{alert && <CustomAlert msg={errMsg} />}</div>
+      <div className='error'>
+        {alert && <CustomAlert type={type} msg={msg} />}
+      </div>
     </>
   )
 }

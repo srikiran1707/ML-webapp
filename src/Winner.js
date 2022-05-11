@@ -4,7 +4,7 @@ import AutoSelect from './components/AutoSelect'
 import PredictionResponse from './components/PredictionResponse'
 import Container from '@mui/material/Container'
 import './Winner.scss'
-import { getTeam } from './constants/teams'
+import { getTeam, filterTeamSelect } from './utils/common'
 
 const Winner = () => {
   const [Home, setHome] = useState('')
@@ -38,10 +38,18 @@ const Winner = () => {
           <div className='header'>NBA Win Predictor</div>
           <div className='body'>
             <div className='home team'>
-              <AutoSelect name='Home Team' onChange={onHomeChangeHandler} />
+              <AutoSelect
+                name='Home Team'
+                teams={filterTeamSelect(Away)}
+                onChange={onHomeChangeHandler}
+              />
             </div>
             <div className='away team'>
-              <AutoSelect name='Away Team' onChange={onAwayChangeHandler} />
+              <AutoSelect
+                name='Away Team'
+                teams={filterTeamSelect(Home)}
+                onChange={onAwayChangeHandler}
+              />
             </div>
           </div>
           <div className='button'>
