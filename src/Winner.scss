@@ -62,9 +62,9 @@ body {
 }
 
 //error
-.button {
+.dialog {
   padding-top: 1rem;
-  .error {
+  .alert {
     padding: 1rem;
   }
 }
@@ -89,10 +89,6 @@ body {
 
 .MuiIconButton-root {
   color: #0000009c !important;
-}
-.viewStats {
-  color: #000000 !important;
-  background: #00000040 !important;
 }
 
 .MuiBackdrop-root {
@@ -126,4 +122,12 @@ body {
   &.win {
     background: #8fc90a9e;
   }
+}
+
+.button-padding {
+  padding-left: 1rem;
+}
+
+.button {
+  display: flex;
 }

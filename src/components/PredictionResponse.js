@@ -7,11 +7,11 @@ import { styled } from '@mui/material/styles'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import QueryStatsIcon from '@mui/icons-material/QueryStats'
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction'
 
 import axios from 'axios'
 import { isNilorEmpty, getTeam } from '../utils/common'
@@ -111,15 +111,29 @@ const PredictionResponse = (props) => {
 
   return (
     <>
-      <Button
-        size='large'
-        variant='contained'
-        disabled={isNilorEmpty(Home) || isNilorEmpty(Away)}
-        onClick={handleSubmit}
-      >
-        Predict
-      </Button>
-
+      <div className='button'>
+        <div className='button-padding'>
+          <Button
+            size='medium'
+            variant='contained'
+            disabled={isNilorEmpty(Home) || isNilorEmpty(Away)}
+            onClick={handleSubmit}
+          >
+            <OnlinePredictionIcon />
+            Predict
+          </Button>
+        </div>
+        <div className='button-padding'>
+          <Button
+            size='medium'
+            variant='contained'
+            disabled={isNilorEmpty(Home) || isNilorEmpty(Away)}
+          >
+            <QueryStatsIcon />
+            Stats
+          </Button>
+        </div>
+      </div>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby='customized-dialog-title'
@@ -139,14 +153,8 @@ const PredictionResponse = (props) => {
             interpretation
           )} has performed better in recent matches and has a higher rating.`}</Typography>
         </DialogContent>
-        <DialogActions>
-          <Button className='viewStats' autoFocus onClick={handleClose}>
-            <QueryStatsIcon />
-            Stats
-          </Button>
-        </DialogActions>
       </BootstrapDialog>
-      <div className='error'>
+      <div className='alert'>
         {alert && <CustomAlert type={type} msg={msg} />}
       </div>
     </>

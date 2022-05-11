@@ -39,6 +39,7 @@ const Winner = () => {
           <div className='body'>
             <div className='home team'>
               <AutoSelect
+                required
                 name='Home Team'
                 teams={filterTeamSelect(Away)}
                 onChange={onHomeChangeHandler}
@@ -46,13 +47,14 @@ const Winner = () => {
             </div>
             <div className='away team'>
               <AutoSelect
+                required
                 name='Away Team'
                 teams={filterTeamSelect(Home)}
                 onChange={onAwayChangeHandler}
               />
             </div>
           </div>
-          <div className='button'>
+          <div className='dialog'>
             <PredictionResponse Home={Home} Away={Away} getWinner={getWinner} />
           </div>
         </Container>
