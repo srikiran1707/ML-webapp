@@ -222,10 +222,10 @@ async def get_modelstats():
     data = model_stats()
     return {
         "data": {
-            "log_acc":data[0],
-            "rf_acc":data[1],
-            "lsvc_acc":data[2],
-            "knn_acc":data[3]
+            "log_acc":"{:.2f}".format(data[0]*100),
+            "rf_acc":"{:.2f}".format(data[1]*100),
+            "lsvc_acc":"{:.2f}".format(data[2]*100),
+            "knn_acc":"{:.2f}".format(data[3]*100)
         }
     }
 

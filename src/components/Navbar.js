@@ -10,7 +10,7 @@ import SportsBasketballRoundedIcon from '@mui/icons-material/SportsBasketballRou
 import { Typography } from '@mui/material'
 import locale from '../utils/locale'
 
-const pages = ['home', 'about', 'predictor', 'model comparision']
+const pages = ['home', 'about', 'model comparision', 'predictor']
 
 const Navbar = () => {
   return (

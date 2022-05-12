@@ -19,8 +19,15 @@
     height: 800px;
     margin-top: 8rem;
   }
-  .modelChart > canvas {
-    background-color: white;
+  .glassModel {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: -5px 20px 15px 6px rgb(0 0 0 / 20%),
+      0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 5px;
+  }
+  .modelChart > div > canvas {
     padding: 1rem;
   }
 }

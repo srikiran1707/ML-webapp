@@ -41,11 +41,26 @@ const ModelStats = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: 'white',
+        },
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          color: 'white',
+        },
+      },
+      x: {
+        ticks: {
+          color: 'white',
+        },
       },
     },
   }
 
-  const labels = ['Accuracy']
+  const labels = ['Accuracy (%)']
   const data_stats = {
     labels,
     datasets: [
@@ -76,7 +91,9 @@ const ModelStats = () => {
     <div className='modelContainer'>
       <h2 className='header'>Model Comparison</h2>
       <div className='modelChart'>
-        <Bar options={options} data={data_stats} />
+        <div className='glassModel'>
+          <Bar options={options} data={data_stats} />
+        </div>
       </div>
     </div>
   )

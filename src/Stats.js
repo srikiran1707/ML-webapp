@@ -56,6 +56,21 @@ const Stats = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: 'white',
+        },
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          color: 'white',
+        },
+      },
+      x: {
+        ticks: {
+          color: 'white',
+        },
       },
     },
   }
@@ -114,7 +129,7 @@ const Stats = () => {
 
   return (
     <div className='statsContainer'>
-      <h2 className='header'>{`${getTeam(Home)} v/s ${getTeam(Away)}`}</h2>
+      <h2 className='header'>Team stats</h2>
       <div className='chart'>
         <div className='stats'>
           <Bar options={options} data={data_stats} />
