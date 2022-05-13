@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,36 +11,18 @@ import {
 import { Bar } from 'react-chartjs-2'
 import { getTeam, normalizePercentage } from './utils/common'
 
-import axios from 'axios'
 import './Stats.scss'
 
-const Stats = () => {
-  const Home = sessionStorage.getItem('home')
-  const Away = sessionStorage.getItem('away')
-
-  const [home_stats, setHomeStats] = useState([])
-  const [home_statsp, setHomeStatsp] = useState([])
-  const [away_stats, setAwayStats] = useState([])
-  const [away_statsp, setAwayStatsp] = useState([])
-  const [elosm, setElosm] = useState([])
-
-  useEffect(() => {
-    const params = { Home, Away }
-
-    axios
-      .post('http://localhost:8080/teamstats', params)
-      .then((res) => {
-        const data = res.data.data
-        setHomeStats([...data['home']])
-        setHomeStatsp([...data['home%']])
-        setAwayStats([...data['away']])
-        setAwayStatsp([...data['away%']])
-        setElosm({ ...data.elosm })
-      })
-      .catch((error) => {
-        alert(error)
-      })
-  }, [Away, Home])
+const Stats = (props) => {
+  const {
+    Home,
+    home_stats,
+    home_statsp,
+    Away,
+    away_stats,
+    away_statsp,
+    elosm,
+  } = props
 
   ChartJS.register(
     CategoryScale,
@@ -129,7 +111,9 @@ const Stats = () => {
 
   return (
     <div className='statsContainer'>
-      <h2 className='header'>Team stats</h2>
+      <div className='glassHeader'>
+        <h2 className='header'>Team stats</h2>
+      </div>
       <div className='chart'>
         <div className='stats'>
           <Bar options={options} data={data_stats} />

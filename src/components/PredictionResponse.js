@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction'
-import StatsDialog from './StatsDialog'
+import TeamStats from './TeamStats'
 
 import axios from 'axios'
 import { isNilorEmpty, getTeam } from '../utils/common'
@@ -123,7 +123,7 @@ const PredictionResponse = (props) => {
             Predict
           </Button>
         </div>
-        <StatsDialog Home={Home} Away={Away} />
+        <TeamStats Home={Home} Away={Away} />
       </div>
       <BootstrapDialog
         onClose={handleClose}

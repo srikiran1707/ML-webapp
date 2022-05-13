@@ -11,13 +11,26 @@ import Slide from '@mui/material/Slide'
 import { getTeam, isNilorEmpty } from '../utils/common'
 import Stats from '../Stats'
 import { Box } from '@mui/system'
+import CustomAlert from './CustomAlert'
+import axios from 'axios'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 
-const StatsDialog = (props) => {
+const TeamStats = (props) => {
+  const Home = props.Home
+  const Away = props.Away
+
   const [open, setOpen] = useState(false)
+  const [alert, setAlert] = useState(false)
+  const [msg, setMsg] = useState(null)
+  const [type, setType] = useState('')
+  const [home_stats, setHomeStats] = useState([])
+  const [home_statsp, setHomeStatsp] = useState([])
+  const [away_stats, setAwayStats] = useState([])
+  const [away_statsp, setAwayStatsp] = useState([])
+  const [elosm, setElosm] = useState([])
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -27,8 +40,47 @@ const StatsDialog = (props) => {
     setOpen(false)
   }
 
-  const Home = props.Home
-  const Away = props.Away
+  const handleError = (err) => {
+    setAlert(true)
+    setMsg(err)
+    setType('error')
+    setTimeout(() => {
+      setAlert(false)
+      setMsg(null)
+      setType('')
+    }, 3000)
+  }
+
+  const handleSuccess = (msg) => {
+    setAlert(true)
+    setMsg(msg)
+    setType('success')
+    setTimeout(() => {
+      setAlert(false)
+      setMsg(null)
+      setType('')
+    }, 3000)
+  }
+
+  const fetchTeamstats = async () => {
+    const params = { Home, Away }
+
+    await axios
+      .post('http://localhost:8080/teamstats', params)
+      .then((res) => {
+        const data = res.data.data
+        setHomeStats([...data['home']])
+        setHomeStatsp([...data['home%']])
+        setAwayStats([...data['away']])
+        setAwayStatsp([...data['away%']])
+        setElosm({ ...data.elosm })
+        handleClickOpen()
+        handleSuccess('Team stats fetched successfully .')
+      })
+      .catch((error) => {
+        handleError(error.message)
+      })
+  }
 
   return (
     <>
@@ -38,7 +90,7 @@ const StatsDialog = (props) => {
             size='medium'
             variant='contained'
             disabled={isNilorEmpty(Home) || isNilorEmpty(Away)}
-            onClick={handleClickOpen}
+            onClick={fetchTeamstats}
           >
             <QueryStatsIcon />
             Stats
@@ -70,11 +122,20 @@ const StatsDialog = (props) => {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Stats />
+          <Stats
+            Home={Home}
+            Away={Away}
+            home_stats={home_stats}
+            home_statsp={home_statsp}
+            away_stats={away_stats}
+            away_statsp={away_statsp}
+            elosm={elosm}
+          />
+          {alert && <CustomAlert type={type} msg={msg} />}
         </Dialog>
       </div>
     </>
   )
 }
 
-export default StatsDialog
+export default TeamStats

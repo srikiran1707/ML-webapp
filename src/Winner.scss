@@ -27,7 +27,7 @@ body {
   align-items: center;
   .glass {
     width: 800px;
-    height: 600px;
+    height: 500px;
     left: 0;
     right: 0;
     box-shadow: -15px 16px 15px 6px rgb(0 0 0 / 20%),
@@ -40,6 +40,7 @@ body {
     backdrop-filter: blur(10px);
     .MuiContainer-maxWidthSm {
       margin-left: 50px !important;
+      margin-top: 6rem !important;
     }
   }
 }
@@ -87,6 +88,9 @@ body {
   backdrop-filter: blur(10px) !important;
 }
 
+.MuiAlert-standard {
+  margin-top: auto !important;
+}
 .MuiIconButton-root {
   color: #0000009c !important;
 }
@@ -130,4 +134,5 @@ body {
 
 .button {
   display: flex;
+  padding-top: 3rem;
 }

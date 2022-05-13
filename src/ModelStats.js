@@ -13,11 +13,37 @@ import { isNilorEmpty } from './utils/common'
 import { Button } from '@mui/material'
 import { Tooltip as MUITooltip } from '@mui/material'
 import ModelTrainingIcon from '@mui/icons-material/ModelTraining'
+import CustomAlert from './components/CustomAlert'
 import axios from 'axios'
 import './Modelstats.scss'
 
 const ModelStats = () => {
   const [model_stats, setModelStats] = useState({})
+  const [alert, setAlert] = useState(false)
+  const [msg, setMsg] = useState(null)
+  const [type, setType] = useState('')
+
+  const handleError = (err) => {
+    setAlert(true)
+    setMsg(err)
+    setType('error')
+    setTimeout(() => {
+      setAlert(false)
+      setMsg(null)
+      setType('')
+    }, 3000)
+  }
+
+  const handleSuccess = (msg) => {
+    setAlert(true)
+    setMsg(msg)
+    setType('success')
+    setTimeout(() => {
+      setAlert(false)
+      setMsg(null)
+      setType('')
+    }, 3000)
+  }
 
   const fetchModelStats = async () => {
     await axios
@@ -25,9 +51,10 @@ const ModelStats = () => {
       .then((res) => {
         const data = res.data.data
         setModelStats({ ...data })
+        handleSuccess('Model stats fetched successfully .')
       })
       .catch((error) => {
-        alert(error)
+        handleError(error.message)
       })
   }
 
@@ -35,7 +62,7 @@ const ModelStats = () => {
     if (isNilorEmpty(model_stats)) {
       fetchModelStats()
     }
-  }, [model_stats])
+  })
 
   ChartJS.register(
     CategoryScale,
@@ -99,18 +126,21 @@ const ModelStats = () => {
 
   return (
     <div className='modelContainer'>
-      <h2 className='header'>
-        Model Comparison
-        <MUITooltip title='Train Models'>
-          <Button variant='primary' onClick={() => fetchModelStats()}>
-            <ModelTrainingIcon />
-          </Button>
-        </MUITooltip>
-      </h2>
+      <div className='glassHeader'>
+        <h2 className='header'>
+          Model Comparison
+          <MUITooltip title='Train Models'>
+            <Button variant='primary' onClick={() => fetchModelStats()}>
+              <ModelTrainingIcon />
+            </Button>
+          </MUITooltip>
+        </h2>
+      </div>
       <div className='modelChart'>
         <div className='glassModel'>
           <Bar options={options} data={data_stats} />
         </div>
+        {alert && <CustomAlert type={type} msg={msg} />}
       </div>
     </div>
   )
