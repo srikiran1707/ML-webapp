@@ -13,3 +13,7 @@ export const getTeam = (teamName) => {
   if (isNilorEmpty(teamName)) return null
   return teams.find((team) => team.abbreviation === teamName)?.label
 }
+
+export const normalizePercentage = (data) => {
+  return Array.from(data, (x) => x.toFixed(2) * 100)
+}

@@ -1,5 +1,5 @@
 {
-  "name": "webapp-majporj",
+  "name": "NBA Winner Predictor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

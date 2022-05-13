@@ -9,14 +9,18 @@ import {
   Legend,
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
+import { isNilorEmpty } from './utils/common'
+import { Button } from '@mui/material'
+import { Tooltip as MUITooltip } from '@mui/material'
+import ModelTrainingIcon from '@mui/icons-material/ModelTraining'
 import axios from 'axios'
 import './Modelstats.scss'
 
 const ModelStats = () => {
   const [model_stats, setModelStats] = useState({})
 
-  useEffect(() => {
-    axios
+  const fetchModelStats = async () => {
+    await axios
       .get('http://localhost:8080/modelstats')
       .then((res) => {
         const data = res.data.data
@@ -25,7 +29,13 @@ const ModelStats = () => {
       .catch((error) => {
         alert(error)
       })
-  }, [])
+  }
+
+  useEffect(() => {
+    if (isNilorEmpty(model_stats)) {
+      fetchModelStats()
+    }
+  }, [model_stats])
 
   ChartJS.register(
     CategoryScale,
@@ -60,7 +70,7 @@ const ModelStats = () => {
     },
   }
 
-  const labels = ['Accuracy (%)']
+  const labels = ['Accuracy %']
   const data_stats = {
     labels,
     datasets: [
@@ -89,7 +99,14 @@ const ModelStats = () => {
 
   return (
     <div className='modelContainer'>
-      <h2 className='header'>Model Comparison</h2>
+      <h2 className='header'>
+        Model Comparison
+        <MUITooltip title='Train Models'>
+          <Button variant='primary' onClick={() => fetchModelStats()}>
+            <ModelTrainingIcon />
+          </Button>
+        </MUITooltip>
+      </h2>
       <div className='modelChart'>
         <div className='glassModel'>
           <Bar options={options} data={data_stats} />

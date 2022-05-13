@@ -36,7 +36,6 @@ final_team_stats.drop(final_team_stats.columns[cols],axis=1, inplace=True)
 features = final_team_stats.drop(columns = 'Winner')
 label = final_team_stats['Winner']
 
-x_train, x_test, y_train, y_test = train_test_split(features, label, test_size = 0.2)
 
 
 # Processing props required to pass to the model
@@ -146,6 +145,8 @@ def model_stats():
     from sklearn.svm import LinearSVC
     from sklearn.neighbors import KNeighborsClassifier
 
+    x_train, x_test, y_train, y_test = train_test_split(features, label, test_size = 0.2)
+    
     # logistic regression
     y_pred_log = log_model.predict(x_test)
     log_acc= float(metrics.accuracy_score(y_test, y_pred_log))

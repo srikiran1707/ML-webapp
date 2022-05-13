@@ -7,3 +7,7 @@ a {
 button[disabled] > a {
   color: rgba(0, 0, 0, 0.26);
 }
+
+.MuiDialog-paperFullScreen {
+  overflow: hidden !important;
+}

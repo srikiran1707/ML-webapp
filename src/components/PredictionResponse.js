@@ -10,11 +10,9 @@ import DialogContent from '@mui/material/DialogContent'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
-import QueryStatsIcon from '@mui/icons-material/QueryStats'
 import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction'
-import locale from '../utils/locale'
+import StatsDialog from './StatsDialog'
 
-import { Outlet, Link } from 'react-router-dom'
 import axios from 'axios'
 import { isNilorEmpty, getTeam } from '../utils/common'
 
@@ -125,19 +123,7 @@ const PredictionResponse = (props) => {
             Predict
           </Button>
         </div>
-        <div className='button-padding'>
-          <Button
-            size='medium'
-            variant='contained'
-            disabled={isNilorEmpty(Home) || isNilorEmpty(Away)}
-          >
-            <QueryStatsIcon />
-            <Link as={Link} to={`/${locale('stats')}`}>
-              Stats
-            </Link>
-          </Button>
-          <Outlet />
-        </div>
+        <StatsDialog Home={Home} Away={Away} />
       </div>
       <BootstrapDialog
         onClose={handleClose}

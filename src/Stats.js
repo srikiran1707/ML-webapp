@@ -9,7 +9,7 @@ import {
   Legend,
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
-import { getTeam } from './utils/common'
+import { getTeam, normalizePercentage } from './utils/common'
 
 import axios from 'axios'
 import './Stats.scss'
@@ -100,12 +100,12 @@ const Stats = () => {
     datasets: [
       {
         label: getTeam(Home),
-        data: home_statsp,
+        data: normalizePercentage(home_statsp),
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
       {
         label: getTeam(Away),
-        data: away_statsp,
+        data: normalizePercentage(away_statsp),
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
     ],

@@ -32,12 +32,12 @@ const Winner = () => {
       <div className={`Home glassLogo ${prediction === 'H' ? 'win' : ''}`}>
         <div className={`Home Logo `}>
           <img src={require(`./images/${Home || 'default'}.jpg`)} alt={Home} />
-          <p>{getTeam(Home) || 'Home Team'}</p>
+          <p>{getTeam(Home) || 'Select Home Team'}</p>
         </div>
       </div>
       <div className='glass'>
         <Container maxWidth='sm'>
-          <div className='header'>NBA Win Predictor</div>
+          <div className='header'>NBA Winner Predictor</div>
           <div className='body'>
             <div className='home team'>
               <AutoSelect
@@ -64,7 +64,7 @@ const Winner = () => {
       <div className={`Away glassLogo ${prediction === 'A' ? 'win' : ''}`}>
         <div className='Away Logo'>
           <img src={require(`./images/${Away || 'default'}.jpg`)} alt={Away} />
-          <p>{getTeam(Away) || 'Away Team'}</p>
+          <p>{getTeam(Away) || 'Select Away Team'}</p>
         </div>
       </div>
     </div>
