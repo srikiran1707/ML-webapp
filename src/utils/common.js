@@ -15,5 +15,5 @@ export const getTeam = (teamName) => {
 }
 
 export const normalizePercentage = (data) => {
-  return Array.from(data, (x) => x.toFixed(2) * 100)
+  return Array.from(data, (x) => (x > 1 ? x : x.toFixed(2) * 100))
 }

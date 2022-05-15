@@ -32,7 +32,7 @@ const Winner = () => {
       <div className={`Home glassLogo ${prediction === 'H' ? 'win' : ''}`}>
         <div className={`Home Logo `}>
           <img src={require(`./images/${Home || 'default'}.jpg`)} alt={Home} />
-          <p>{getTeam(Home) || 'Select Home Team'}</p>
+          <p>{getTeam(Home) || 'Home Team'}</p>
         </div>
       </div>
       <div className='glass'>
@@ -42,7 +42,8 @@ const Winner = () => {
             <div className='home team'>
               <AutoSelect
                 required
-                name='Home Team'
+                label='Home Team'
+                name={Home}
                 teams={filterTeamSelect(Away)}
                 onChange={onHomeChangeHandler}
               />
@@ -50,7 +51,8 @@ const Winner = () => {
             <div className='away team'>
               <AutoSelect
                 required
-                name='Away Team'
+                label='Away Team'
+                name={Away}
                 teams={filterTeamSelect(Home)}
                 onChange={onAwayChangeHandler}
               />
@@ -64,7 +66,7 @@ const Winner = () => {
       <div className={`Away glassLogo ${prediction === 'A' ? 'win' : ''}`}>
         <div className='Away Logo'>
           <img src={require(`./images/${Away || 'default'}.jpg`)} alt={Away} />
-          <p>{getTeam(Away) || 'Select Away Team'}</p>
+          <p>{getTeam(Away) || 'Away Team'}</p>
         </div>
       </div>
     </div>

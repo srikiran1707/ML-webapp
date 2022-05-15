@@ -85,15 +85,7 @@ def predict_stats(Home,Away):
         df=pd.DataFrame([cols],columns=col_names)
         return df
 
-# todo
-def normalize_stats():
-    from sklearn import preprocessing
-    team_stats = pd.read_csv(open('../model/matchbymatch.csv','rb'), index_col = 0)[::-1]
-    cols =  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,33,34,37,38]
-    team_stats.drop(team_stats.columns[cols],axis=1, inplace=True)
-
-    norm_stats = preprocessing.normalize()
-
+# processing props to get team stats
 def team_stats(Home,Away):
         Home=Home
         Away=Away
@@ -121,7 +113,7 @@ def team_stats(Home,Away):
                 home_stats.append(match_by_match_stats['HRO'][i])
                 home_stats.append(match_by_match_stats['HRT'][i])
                 home_stats.append(match_by_match_stats['HRS'][i])
-                home_stats.append(match_by_match_stats['HRP'][i])
+                home_statsp.append(match_by_match_stats['HRP'][i])
             if(match_by_match_stats['Away'][i]==Away and not away_found):
                 away_found=True
                 away_elo=match_by_match_stats['Away_elo_before'][i]
@@ -132,7 +124,7 @@ def team_stats(Home,Away):
                 away_stats.append(match_by_match_stats['ARO'][i])
                 away_stats.append(match_by_match_stats['ART'][i])
                 away_stats.append(match_by_match_stats['ARS'][i])
-                away_stats.append(match_by_match_stats['ARP'][i])
+                away_statsp.append(match_by_match_stats['ARP'][i])
             if(home_found and away_found):
                 cols.extend([home_elo,away_elo,home_sm,away_sm])
                 break
@@ -144,6 +136,7 @@ def model_stats():
     from sklearn.ensemble import RandomForestClassifier
     from sklearn.svm import LinearSVC
     from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.svm import SVC
 
     x_train, x_test, y_train, y_test = train_test_split(features, label, test_size = 0.2)
     
@@ -162,8 +155,8 @@ def model_stats():
     lsvc = LinearSVC(random_state=0, tol=1e-5, max_iter=1000)
     lsvc.fit(x_train, y_train)
 
-    y_pred_svc = lsvc.predict(x_test)
-    lsvc_acc= float(metrics.accuracy_score(y_test, y_pred_svc))
+    y_pred_lsvc = lsvc.predict(x_test)
+    lsvc_acc= float(metrics.accuracy_score(y_test, y_pred_lsvc))
 
     # KNN
     knn = KNeighborsClassifier(n_neighbors=10)
@@ -172,7 +165,15 @@ def model_stats():
     y_pred_knn = knn.predict(x_test)
     knn_acc= float(metrics.accuracy_score(y_test, y_pred_knn))
 
-    return [log_acc,rf_acc,lsvc_acc,knn_acc]
+    # SVR - support vector regression
+    svr = SVC()
+    svr.fit(x_train, y_train)
+
+    y_pred_svr = svr.predict(x_test)
+    svr_acc= float(metrics.accuracy_score(y_test, y_pred_svr))
+
+
+    return [log_acc,rf_acc,lsvc_acc,knn_acc,svr_acc]
 
 
 
@@ -202,6 +203,7 @@ async def get_predict(data: Match):
     }
 }
 
+# Setting up the team stats route
 @app.post("/teamstats/")
 async def get_teamstats(data: Match):
     Home=data.Home.upper()
@@ -217,7 +219,7 @@ async def get_teamstats(data: Match):
         }
     }
 
-
+# Setting up the model stats route
 @app.get("/modelstats/")
 async def get_modelstats():
     data = model_stats()
@@ -226,7 +228,8 @@ async def get_modelstats():
             "log_acc":"{:.2f}".format(data[0]*100),
             "rf_acc":"{:.2f}".format(data[1]*100),
             "lsvc_acc":"{:.2f}".format(data[2]*100),
-            "knn_acc":"{:.2f}".format(data[3]*100)
+            "knn_acc":"{:.2f}".format(data[3]*100),
+            "svr_acc":"{:.2f}".format(data[4]*100)
         }
     }
 

@@ -2,7 +2,6 @@ const navigationMapper = {
   home: '',
   predictor: 'predictor',
   about: 'about',
-  stats: 'predictor/stats',
   'model comparision': 'modelstats',
 }
 

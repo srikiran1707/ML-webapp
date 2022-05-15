@@ -126,6 +126,9 @@ body {
   &.win {
     background: #8fc90a9e;
   }
+  > div > p {
+    font-family: sans-serif;
+  }
 }
 
 .button-padding {

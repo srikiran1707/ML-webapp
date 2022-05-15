@@ -104,28 +104,33 @@ const ModelStats = () => {
       {
         label: 'Logistic Regression',
         data: [model_stats.log_acc],
-        backgroundColor: 'rgba(2, 85, 148, 0.66)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
       {
         label: 'Random Forest',
         data: [model_stats.rf_acc],
-        backgroundColor: 'rgba(255, 5, 65, 0.51)',
+        backgroundColor: 'rgba(72, 143, 49, 1)',
       },
       {
-        label: 'Linear SVC',
+        label: 'Support Vector Regression',
+        data: [model_stats.svr_acc],
+        backgroundColor: 'rgba(122, 81, 149, 1)',
+      },
+      {
+        label: 'Linear Support Vector Classification',
         data: [model_stats.lsvc_acc],
-        backgroundColor: 'rgba(165, 5, 255, 0.51)',
+        backgroundColor: 'rgba(88, 80, 141, 1)',
       },
       {
-        label: 'KNN',
+        label: 'K-Nearest Neighbours',
         data: [model_stats.knn_acc],
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        backgroundColor: 'rgba(255, 166, 0, 1)',
       },
     ],
   }
 
   return (
-    <div className='modelContainer'>
+    <div className='container modelContainer'>
       <div className='glassHeader'>
         <h2 className='header'>
           Model Comparison

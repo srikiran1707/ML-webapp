@@ -57,8 +57,13 @@ const Stats = (props) => {
     },
   }
 
-  const labels_stats = ['Offensive Rebound', 'Steal', 'Turnover', 'Points']
-  const labels_statsp = ['Field Goal %', '3 Pointer %', 'Free Throw %']
+  const labels_stats = ['Offensive Rebound', 'Steal', 'Turnover']
+  const labels_statsp = [
+    'Field Goal %',
+    '3 Pointer %',
+    'Free Throw %',
+    'Points',
+  ]
   const labels_elosm = ['ELO', 'Secret Metric']
 
   const data_stats = {

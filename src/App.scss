@@ -11,3 +11,16 @@ button[disabled] > a {
 .MuiDialog-paperFullScreen {
   overflow: hidden !important;
 }
+
+.container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-image: url('./images/NBA.png');
+  background-size: cover;
+  height: 900px;
+  top: 69px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
