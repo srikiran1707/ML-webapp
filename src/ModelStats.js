@@ -130,7 +130,7 @@ const ModelStats = () => {
   }
 
   return (
-    <div className='container modelContainer'>
+    <div className='modelContainer'>
       <div className='glassHeader'>
         <h2 className='header'>
           Model Comparison

@@ -21,6 +21,91 @@ button[disabled] > a {
   height: 900px;
   top: 69px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.glassAbout {
+  width: 800px;
+  height: 500px;
+  left: 0;
+  right: 0;
+  margin-left: 1rem;
+  box-shadow: -15px 16px 15px 6px rgb(0 0 0 / 20%),
+    0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+  border-radius: 5px;
+  background-color: rgb(0 0 0 / 40%);
+  backdrop-filter: blur(10px);
+  > p {
+    padding: 2rem;
+  }
+  > h4 {
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  > hr {
+    border-color: rgb(255 252 252 / 12%);
+  }
+}
+
+.multiGlass {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90%;
+}
+
+.glassAboutUs {
+  width: 400px;
+  height: 500px;
+  left: 0;
+  right: 0;
+  margin-left: 1rem;
+}
+
+img {
+  width: 100%;
+}
+
+.glassHeader {
+  > .header {
+    text-transform: uppercase;
+    background-color: rgb(0 0 0 / 75%) !important;
+    padding: 1rem 2rem 1rem 2rem;
+    margin-left: -14rem;
+    box-shadow: -5px 20px 15px 6px rgb(0 0 0 / 20%),
+      0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 5px;
+  }
+}
+
+.result {
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  margin: 32px;
+  position: relative;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  max-height: calc(100% - 64px);
+  max-width: 600px;
+  color: black !important;
+  background-color: rgba(255, 255, 255, 0.46) !important;
+  box-shadow: -5px 20px 15px 6px rgb(0 0 0 / 20%),
+    0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+  &.disabled {
+    opacity: 0;
+  }
 }

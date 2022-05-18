@@ -8,7 +8,7 @@ body {
 }
 
 //setting background image
-.container {
+.PredictContainer {
   position: fixed;
   left: 0;
   right: 0;
@@ -19,17 +19,18 @@ body {
 }
 
 //setting glassmorphism for inner div
-.container {
+.PredictContainer {
   height: 900px;
   top: 69px;
   display: flex;
   justify-content: center;
   align-items: center;
   .glass {
-    width: 800px;
+    width: 650px;
     height: 500px;
     left: 0;
     right: 0;
+    margin-left: 1rem;
     box-shadow: -15px 16px 15px 6px rgb(0 0 0 / 20%),
       0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
     border-radius: 5px;
@@ -40,7 +41,7 @@ body {
     backdrop-filter: blur(10px);
     .MuiContainer-maxWidthSm {
       margin-left: 50px !important;
-      margin-top: 6rem !important;
+      margin-top: 4rem !important;
     }
   }
 }
@@ -58,16 +59,15 @@ body {
 .body {
   display: flex;
   .team {
-    padding: 1rem;
+    width: 100%;
   }
 }
 
 //error
-.dialog {
+
+.alert {
   padding-top: 1rem;
-  .alert {
-    padding: 1rem;
-  }
+  height: 2rem;
 }
 
 .MuiInputLabel-animated {
@@ -90,9 +90,6 @@ body {
 
 .MuiAlert-standard {
   margin-top: auto !important;
-}
-.MuiIconButton-root {
-  color: #0000009c !important;
 }
 
 .MuiBackdrop-root {
@@ -138,4 +135,25 @@ body {
 .button {
   display: flex;
   padding-top: 3rem;
+}
+
+.glassResult {
+  width: 650px;
+  height: 500px;
+  left: 0;
+  right: 0;
+  margin-left: 1rem;
+  box-shadow: -15px 16px 15px 6px rgb(0 0 0 / 20%),
+    0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+  border-radius: 5px;
+  background-color: rgb(0 0 0 / 40%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.MuiOutlinedInput-root {
+  width: 70% !important;
 }

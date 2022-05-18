@@ -5,7 +5,7 @@ import Navbar from './components/Navbar'
 import Home from './Home'
 import About from './About'
 import ModelStats from './ModelStats'
-import Aboutus from './Aboutus'
+import AboutUs from './AboutUs'
 import './App.scss'
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
           <Route path='about' element={<About />} />
           <Route path='predictor' element={<Winner />} />
           <Route path='modelstats' element={<ModelStats />} />
-          <Route path='aboutus' element={<Aboutus />} />
+          <Route path='aboutus' element={<AboutUs />} />
         </Route>
       </Routes>
     </BrowserRouter>
